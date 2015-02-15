@@ -33,4 +33,24 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+  #custom filed --->
+  field :authentication_token
+  before_save :ensure_authentication_token
+  private
+  def ensure_authentication_token
+    if self.authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(authentication_token: token).first
+    end
+  end
+
+  def reset_authentication_token!
+      self.authentication_token = generate_authentication_token
+      self.save
+  end
 end
