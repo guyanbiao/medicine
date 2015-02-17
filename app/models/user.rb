@@ -6,6 +6,7 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
+  field :username,           type: String, default: ""
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
 
@@ -36,6 +37,8 @@ class User
   #custom filed --->
   field :authentication_token
   before_save :ensure_authentication_token
+
+  has_many :tweets
   private
   def ensure_authentication_token
     if self.authentication_token.blank?

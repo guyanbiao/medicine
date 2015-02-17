@@ -1,14 +1,15 @@
 class TweetsController < ApplicationController
+  before_action :authenticate_user!
   def index
-    render json: ["sandy 好诱惑", "711打折啦", "你们这群篮球菜鸟，马甸公园不服来战", "一股脑残波喷死你"]
+    render json: Tweet.all.map(&:content)
   end
 
   def create
-    Tweet.new tweet_params
+    current_user.tweets.create tweet_params
     render json: {}
   end
 
   def tweet_params
-    params[:tweet].permit(:content)
+    params.require(:tweet).permit(:content)
   end
 end

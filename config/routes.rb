@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   }
   root 'home#index'
   resources :tweets
+
+  get "users/username" => "users"
 end
