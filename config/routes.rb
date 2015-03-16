@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     unlocks: "accounts/unlocks"
   }
   root 'home#index'
-  resources :tweets
+  resources :tweets do
+    resources :comments
+  end
 
   get "users/username" => "users"
 end

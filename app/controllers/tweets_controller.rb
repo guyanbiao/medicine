@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!
   def index
-    render json: Tweet.all.map(&:content)
+    render json: Tweet.all.map {|t|{content: t.content, id: t.id.to_s, comments: t.comments.map(&:content)}}
   end
 
   def create
