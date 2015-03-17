@@ -19,6 +19,9 @@ class TweetsController < ApplicationController
   end
 
   def vote
+    tweet = Tweet.find params[:id]
+    #顶或者踩之后不能更改
+    tweet.update_attributes(feedback: params[:feedback])
   end
 
   def tweet_params

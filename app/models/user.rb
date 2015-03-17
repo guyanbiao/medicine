@@ -44,6 +44,10 @@ class User
   has_many :tweets
   has_many :comments
   has_many :foot_points
+  has_many :received_messages, class_name: "Message", foreign_key: "receiver_id"
+  has_many :sended_messages, class_name: "Message", foreign_key: "sender_id"
+
+
 
   def password_required?
       super && provider.blank?

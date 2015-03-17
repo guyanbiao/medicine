@@ -6,6 +6,7 @@ class Tweet
   field :votes,           type: Integer, default: 0
   field :feedback,           type: Integer, default: 0
   field :location,           type: Array
+  validates_inclusion_of :feedback, in: [0, 1, -1]
   belongs_to :user
   has_many :comments
   has_many :images

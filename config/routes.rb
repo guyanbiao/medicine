@@ -22,7 +22,8 @@ Rails.application.routes.draw do
 
   #infohub
   get "messages" => "infohub"
-  get "messages/:sesson_id" => "infohub#show_message"
+  post "messages" => "infohub#create_message"
+  get "messages/:session_id" => "infohub#show_message"
   get "replies" => "infohub"
   get "activities" => "infohub"
 end

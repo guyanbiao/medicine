@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
 
   def index
     tweet = Tweet.find params[:tweet_id]
-    render json: tweet.comment_json
+    render json: tweet.comments.map(&Tweet.comment_block)
   end
 
   def create_sub
