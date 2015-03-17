@@ -5,11 +5,12 @@ class Tweet
   field :content, type: String, default: ""
   field :votes,           type: Integer, default: 0
   field :feedback,           type: Integer, default: 0
+  field :location,           type: Array
   belongs_to :user
   has_many :comments
   has_many :images
   has_many :sub_comments
-  has_one :footpoint, as: :element
+  has_one :foot_point, as: :element
   validates_length_of :content, minimum: 1
 
   def share_url

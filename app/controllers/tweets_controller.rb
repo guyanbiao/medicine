@@ -19,11 +19,10 @@ class TweetsController < ApplicationController
   end
 
   def vote
-
   end
 
   def tweet_params
-    params.require(:tweet).permit(:content)
+    params.require(:tweet).permit(:content, :location => [])
   end
 
   private

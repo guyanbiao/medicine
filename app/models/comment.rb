@@ -6,5 +6,5 @@ class Comment
   belongs_to :tweet
   belongs_to :user
   has_many :sub_comments
-  has_one :footpoint, as: :element
+  has_one :foot_point, as: :element
 end

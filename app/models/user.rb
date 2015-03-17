@@ -43,7 +43,7 @@ class User
 
   has_many :tweets
   has_many :comments
-  has_many :footpoints
+  has_many :foot_points
 
   def password_required?
       super && provider.blank?
