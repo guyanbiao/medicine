@@ -1,7 +1,16 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!
+  def show
+    tweet = Tweet.find params[:id]
+    page_num = params[:page_num] || 1
+    comments = tweet.comments.page(1).per(per_page).map &Tweet.comment_block
+    render json: Tweet.tweet_block.call(tweet)
+    .merge({comments: comments})
+  end
+
   def index
-    render json: Tweet.all.map {|t|{content: t.content, id: t.id.to_s, comments: t.comments.map(&:content)}}
+    page_num = params[:page_num] || 1
+    render json: Tweet.page(page_num).per(per_page).map(&Tweet.tweet_block)
   end
 
   def create
@@ -9,7 +18,16 @@ class TweetsController < ApplicationController
     render json: {}
   end
 
+  def vote
+
+  end
+
   def tweet_params
     params.require(:tweet).permit(:content)
+  end
+
+  private
+  def per_page
+    20
   end
 end

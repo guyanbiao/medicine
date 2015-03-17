@@ -14,11 +14,11 @@ class Accounts::SessionsController < Devise::SessionsController
       f.html {super}
       f.json {
         auth_options = { scope: resource_name, recall: "#{controller_path}#new" }
-                         self.resource = warden.authenticate!(auth_options)
-                         set_flash_message(:notice, :signed_in) if is_flashing_format?
-                         sign_in(resource_name, resource)
-                         render json: {token: resource.authentication_token}
-        }
+        self.resource = warden.authenticate!(auth_options)
+        set_flash_message(:notice, :signed_in) if is_flashing_format?
+        sign_in(resource_name, resource)
+        render json: {token: resource.authentication_token}
+      }
     end
   end
 

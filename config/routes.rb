@@ -10,7 +10,19 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :tweets do
     resources :comments
+    member do
+      post :vote
+    end
   end
+  #comments
+  post "comments/:commend_id/sub_comments" => "comments#create_sub"
 
+  #user
   get "users/username" => "users"
+
+  #infohub
+  get "messages" => "infohub"
+  get "messages/:sesson_id" => "infohub#show_message"
+  get "replies" => "infohub"
+  get "activities" => "infohub"
 end

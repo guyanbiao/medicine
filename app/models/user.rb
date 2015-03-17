@@ -7,8 +7,11 @@ class User
 
   ## Database authenticatable
   field :username,           type: String, default: ""
+  field :avatar,           type: String, default: ""
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
+  field :provider, type: String
+  field :uid, type: String
 
   ## Recoverable
   field :reset_password_token,   type: String
@@ -39,6 +42,17 @@ class User
   before_save :ensure_authentication_token
 
   has_many :tweets
+  has_many :comments
+  has_many :footpoints
+
+  def password_required?
+      super && provider.blank?
+  end
+
+  def email_required?
+      super && provider.blank?
+  end
+
   private
   def ensure_authentication_token
     if self.authentication_token.blank?
