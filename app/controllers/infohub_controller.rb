@@ -1,4 +1,5 @@
 class InfohubController < ApplicationController
+  before_action :authenticate_user!
   def replies
     render json: {}
   end
@@ -33,11 +34,23 @@ class InfohubController < ApplicationController
   end
 
   def create_message
-    sender = User.find params[:sender_id]
+    sender = current_user
     receiver = User.find params[:receiver_id]
-    chat_session = Chat
-    Message.create(sender: sender,
+    message = Message.where(sender: sender, receiver: receiver).first
+    if message
+      chat_session = message.chat_session
+    else
+      chat_session = ChatSession.create
+    end
+    m = Message.new(sender: sender,
                    receiver: receiver,
-                   content: params[:content])
+                   content: params[:content],
+                   chat_session: chat_session
+                  )
+    if m.save
+      render json: {}
+    else
+      render json: m.errors.full_messages
+    end
   end
 end
