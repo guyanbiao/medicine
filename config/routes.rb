@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
   end
   #comments
-  post "comments/:commend_id/sub_comments" => "comments#create_sub"
+  post "comments/:comment_id/sub_comments" => "comments#create_sub"
 
   #user
   get "users/username" => "users"

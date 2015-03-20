@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
 
   def create_sub
     comment = Comment.find params[:comment_id]
-    comment.sub_comments.create(content: params[:content])
+    comment.sub_comments.create(content: params[:content], user: current_user)
     render json: {}
   end
 end
