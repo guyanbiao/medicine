@@ -25,7 +25,7 @@ class Tweet
       avatar: c.user.avatar,
       username: c.user.username,
       content: c.content,
-      sub_comments: c.sub_comments.map {|sb| {username: sb.user.username, content: sb.user.content}},
+      sub_comments: c.sub_comments.map {|sb| {username: sb.user.username, content: sb.content}},
     }}
   end
 
