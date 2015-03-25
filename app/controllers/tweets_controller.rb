@@ -9,8 +9,16 @@ class TweetsController < ApplicationController
   end
 
   def index
-    page_num = params[:page_num] || 1
-    render json: Tweet.page(page_num).per(per_page).map(&Tweet.tweet_block)
+      begin
+          if params[:page_num]
+              page_num = Integer(params[:page_num])
+          else
+              page_num = 1
+          end
+      rescue
+          page_num = 1
+      end
+    render json: {result: Tweet.page(page_num).per(per_page).map(&Tweet.tweet_block), is_has_more: (Tweet.count > page_num*per_page)}
   end
 
   def create

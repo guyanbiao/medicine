@@ -37,7 +37,7 @@ class Tweet
       share_url: t.share_url,
       votes: t.votes,
       comments_counts: t.comments.count,
-      created_at: t.created_at,
+      created_at: t.created_at.to_i,
       zoom_images: t.images.map(&:url),
       images: t.images.map(&:url),
       id: t.id.to_s,
