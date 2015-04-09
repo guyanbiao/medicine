@@ -1,6 +1,42 @@
+<%= javascript_include_tag "strophe" %>
 <% if user_signed_in? %>
   <%= current_user.email %>
 <% else %>
   lll
 <% end %>
+
+<script>
+  var BOSH_SERVICE = 'http://sand.chinacloudapp.cn/http-bind/';
+  var connection = null;
+
+  function onConnect(status)
+  {
+    if (status == Strophe.Status.CONNECTING) {
+      log('Strophe is connecting.');
+      } else if (status == Strophe.Status.CONNFAIL) {
+      log('Strophe failed to connect.');
+      $('#connect').get(0).value = 'connect';
+      } else if (status == Strophe.Status.DISCONNECTING) {
+      log('Strophe is disconnecting.');
+      } else if (status == Strophe.Status.DISCONNECTED) {
+      log('Strophe is disconnected at: ' + (new Date()).toString());
+      } else if (status == Strophe.Status.CONNECTED) {
+      connection.addHandler(onMessage, null, 'message', null, null,  null);
+      window.strophe_connected = true;
+      set_user_status(gon.user_status);
+    }
+
+  }
+
+  function onMessage(msg) {
+    console.log(msg)
+  }
+
+  $(document).ready(function () {
+    connection = new Strophe.Connection(BOSH_SERVICE);
+    jid =   "15001@sand.chinacloudapp.cn"
+    connection.connect(jid, '000000', onConnect);
+  });
+</script>
+
 
