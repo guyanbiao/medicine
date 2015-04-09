@@ -22,7 +22,10 @@ class TweetsController < ApplicationController
   end
 
   def create
-    current_user.tweets.create tweet_params
+    tweet = current_user.tweets.create tweet_params
+    params[:images] && params[:images].each do  |i|
+      t.attachments.create image: i
+    end
     render json: {}
   end
 

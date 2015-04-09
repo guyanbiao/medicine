@@ -5,13 +5,15 @@ class Tweet
   field :content, type: String, default: ""
   field :votes,           type: Integer, default: 0
   field :feedback,           type: Integer, default: 0
-  field :location,           type: Array
+  field :location,           type: Hash
+  index( { location: "2dsphere" })
   validates_inclusion_of :feedback, in: [0, 1, -1]
   belongs_to :user
   has_many :comments
   has_many :images
   has_many :sub_comments
   has_one :foot_point, as: :element
+  has_many :attachments
   validates_length_of :content, minimum: 1
 
   def share_url
