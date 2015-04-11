@@ -1444,6 +1444,10 @@ Strophe = {
     /* jshint ignore:start */
     log: function (level, msg)
     {
+      if (this.LogLevel.ERROR == level) {
+        console.error(msg);
+      }
+
         return;
     },
     /* jshint ignore:end */
