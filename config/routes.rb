@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   get "messages/:session_id" => "infohub#show_message"
   get "replies" => "infohub"
   get "activities" => "infohub"
+  mount API => '/'
+
 end

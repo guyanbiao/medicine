@@ -24,3 +24,5 @@ gem 'pry-nav'
 gem 'thin'
 gem 'kaminari'
 gem 'carrierwave-mongoid'
+gem 'grape'
+gem "hashie-forbidden_attributes"
