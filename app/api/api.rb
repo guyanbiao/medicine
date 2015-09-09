@@ -4,9 +4,21 @@ class API < Grape::API
   get :abc do
     {name: "1"}
   end
-  resource :spline do
+  resource :meals do
+    desc "get all meals"
     get do
-      "ooo"
+     5.times.map { 
+        {
+          title: "meal",
+          lat: "187.1",
+          lng: "189.2",
+          price: "19",
+          left_seats: 4,
+        }
+     }
+    end
+    post :create_location do
+      {name: "meal"}
     end
   end
 end
