@@ -7,7 +7,7 @@ class API < Grape::API
   resource :meals do
     desc "get all meals"
     get do
-     5.times.map { 
+      5.times.map { 
         {
           title: "meal",
           lat: "187.1",
@@ -15,10 +15,10 @@ class API < Grape::API
           price: "19",
           left_seats: 4,
         }
-     }
+      }
     end
     post :create_location do
-      {name: "meal"}
+      Meal.create(location: [params[:lat], params[:lng]])
     end
   end
 end
