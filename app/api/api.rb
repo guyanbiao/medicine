@@ -1,6 +1,13 @@
 class API < Grape::API
   prefix 'api'
   format :json
+
+  helpers do
+    def current_user
+      User.last
+    end
+  end
+
   get :abc do
     {name: "1"}
   end
@@ -18,7 +25,8 @@ class API < Grape::API
       }
     end
     post :create_location do
-      Meal.create(location: [params[:lat], params[:lng]])
+      meal = current_user.meals.create(location: [params[:lat], params[:lng]])
+      {id: meal.id.to_s}
     end
   end
 end

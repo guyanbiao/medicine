@@ -41,12 +41,7 @@ class User
   field :authentication_token
   before_save :ensure_authentication_token
 
-  has_many :tweets
-  has_many :comments
-  has_many :foot_points
-  has_many :received_messages, class_name: "Message", foreign_key: "receiver_id"
-  has_many :sended_messages, class_name: "Message", foreign_key: "sender_id"
-  has_many :sub_comments
+  has_many :meals
 
 
 
