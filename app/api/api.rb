@@ -28,5 +28,21 @@ class API < Grape::API
       meal = current_user.meals.create(location: [params[:lat], params[:lng]])
       {id: meal.id.to_s}
     end
+
+    params do
+      requires :meal, type: Hash do
+        requires :meal_time, type: String
+        requires :price, type: String
+        requires :person_limit, type: Integer
+      end
+    end
+    post :add_more_info do
+      meal = Meal.find params[:id]
+      meal.update_attributes params[:meal]
+    end
+
+    post :upload do
+      puts params
+    end
   end
 end
