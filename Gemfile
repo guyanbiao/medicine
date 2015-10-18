@@ -26,3 +26,5 @@ gem 'kaminari'
 gem 'carrierwave-mongoid'
 gem 'grape'
 gem "hashie-forbidden_attributes"
+gem 'activesupport-json_encoder', github: 'rails/activesupport-json_encoder'
+
