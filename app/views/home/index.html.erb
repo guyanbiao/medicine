@@ -1,8 +1,8 @@
-<%= javascript_include_tag "strophe" %>
-<%= javascript_include_tag "strophe.muc" %>
-<% if user_signed_in? %>
-  <%= current_user.email %>
-<% else %>
-  lll
-<% end %>
 
+<button class="btn btn-success">导入表格</button>
+
+
+<%= form_tag "/home/import", multipart: true do %>
+<%= file_field :excel, :content %>
+<%= submit_tag "提交" %>
+<% end %>

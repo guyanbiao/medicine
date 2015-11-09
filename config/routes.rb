@@ -7,25 +7,8 @@ Rails.application.routes.draw do
     passwords: "accounts/passwords",
     unlocks: "accounts/unlocks"
   }
+
   root 'home#index'
-  resources :tweets do
-    resources :comments
-    member do
-      post :vote
-    end
-  end
-  #comments
-  post "comments/:comment_id/sub_comments" => "comments#create_sub"
-
-  #user
-  get "users/username" => "users"
-
-  #infohub
-  get "messages" => "infohub"
-  post "messages" => "infohub#create_message"
-  get "messages/:session_id" => "infohub#show_message"
-  get "replies" => "infohub"
-  get "activities" => "infohub"
-  mount API => '/'
+  post 'home/import'
 
 end
