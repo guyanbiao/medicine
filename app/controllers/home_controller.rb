@@ -23,6 +23,14 @@ class HomeController < ApplicationController
     render text: "导入成功"
   end
 
+  def patients
+    @patients = Patient.all
+  end
+
+  def medicines
+    @medicines = Medicine.all
+  end
+
   private
   def new_round(p)
     if p[:medicines].length > 0
@@ -43,6 +51,7 @@ class HomeController < ApplicationController
         medicine: Medicine.where(name: m[:name]).first_or_create)
     end
     p.save
+
   end
 
   def age(x)

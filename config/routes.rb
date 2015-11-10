@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   post 'home/import'
+  get 'home/patients'
+  get 'home/medicines'
 
 end

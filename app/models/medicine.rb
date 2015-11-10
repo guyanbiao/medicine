@@ -1,5 +1,5 @@
 class Medicine
   include Mongoid::Document
-  belongs_to :prescription_item
+  has_many :prescription_items
   field :name, type: String
 end

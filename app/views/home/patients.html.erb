@@ -1,0 +1,34 @@
+<% @patients.each do |p| %>
+  <h3>基本信息</h3>
+  <div class="row">
+    <div class="col-sm-3">
+      <h5>姓名</h5>
+      <div><%= p.name %></div>
+    </div>
+    <div class="col-sm-3">
+      <h5>性别</h5>
+      <div><%= p.gender %></div>
+    </div>
+    <div class="col-sm-3">
+      <h5>年龄</h5>
+      <div><%= p.age %></div>
+    </div>
+    <div class="col-sm-3">
+      <h5>临床诊断</h5>
+      <div><%= p.symptoms.map(&:name).join(", ") %></div>
+    </div>
+  </div>
+
+  <h3>用药</h3>
+  <table class="table table-striped">
+    <tr><th>药名</th><th>用量</th></tr>
+    <% p.prescriptions.each do |pres| %>
+      <% pres.prescription_items.each do |pres_item| %>
+      <tr>
+        <td><%= pres_item.medicine.try(:name) %></td>
+        <td><%= pres_item.amount %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </table>
+<% end %>

@@ -1,0 +1,9 @@
+<table class="table table-striped">
+  <tr><th>药名</th><th>用药次数</th></tr>
+    <% @medicines.each  do |m|%>
+    <tr>
+      <td> <%= m.name %> </td>
+      <td> <%= m.prescription_items.count %> </td>
+    </tr>
+    <% end %>
+</table>
